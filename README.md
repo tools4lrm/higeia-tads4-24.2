@@ -23,3 +23,14 @@ o paciente da acolhida até a sua alta, registrando todos os dados e oferecendo 
 
 o hospital precisa de um sistema simples que armazene os dados dos leitos e pacientes em diferentes alas. 
 O sistema deverá permitir o armazenamento de um número fixo, já que cada ala tem um número limitado de leitos.
+
+
+## Iteração-II: Controle de entrada e saída da triagem 
+
+No nosso último encontro com o cliente-pagante, momento no qual apresentamos a implementação e conceitos abstraídos de como os leitos serão controlados, 
+O Hospital informou da necessidade de um sistema mais flexível para o setor de triagem, onde pacientes entram e saem continuamente. 
+O número de pacientes varia ao longo do dia, e o sistema deve ser capaz de adicionar novos pacientes à lista ou remover aqueles que foram atendidos.
+
+> parece que uma lista encadeada é ideal para esse caso, já que o número de pacientes é dinâmico, e inserir ou remover um paciente deve ser feito de forma eficiente.  
+>
+> Na triagem, cada paciente será representado por um nó na lista, contendo informações pessoais e o próximo paciente na fila. A lista poderá crescer e diminuir conforme pacientes são atendidos ou transferidos.  
