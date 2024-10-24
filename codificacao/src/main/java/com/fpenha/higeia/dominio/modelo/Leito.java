@@ -6,4 +6,8 @@ public class Leito {
     public Leito(Paciente paciente){
         this.paciente = paciente;
     }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
 }

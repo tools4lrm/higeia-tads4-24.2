@@ -18,7 +18,46 @@ public class AlaTest {
         criandoUmaAlaComQuantidadeMinimaInvalida(-1);
     }
 
-  
+    @Test
+    void adicionarPacienteEmAlaLotada() throws DominioException{
+
+        Ala ala = new Ala(null, 1);
+        ala.adicionarPaciente(new Paciente(null, null));
+
+        Exception excecaoLancada = assertThrows(DominioException.class,
+                                () -> ala.adicionarPaciente(new Paciente(null, null)),
+                                "Esperado que lance uma exeção de Ala Lotada" );
+                            
+        assertTrue(excecaoLancada.getMessage().contains("Ala Lotada: "));
+        
+    }
+
+    @Test
+    void removerPacienteEmAlaVazia() throws DominioException {
+
+        Ala ala = new Ala(null, 1);
+        
+        Exception excecaoLancada = assertThrows(DominioException.class,
+                                () -> ala.removerPaciente(),
+                                "Esperado que lance uma exeção de Ala Vazia" );
+                            
+        assertTrue(excecaoLancada.getMessage().contains("Ala Vazia: "));
+        
+    }
+
+    @Test
+    void removerPacienteDeAlaLotada() throws DominioException {
+
+        Ala ala = new Ala(null, 1);
+        ala.adicionarPaciente(new Paciente("fabio", "123"));
+
+        assertThrows(DominioException.class,
+               () -> ala.adicionarPaciente(new Paciente(null, null)),
+               "Esperado que lance uma exeção de Ala Lotada" );
+
+        Paciente paciente = ala.removerPaciente();       
+        assertTrue(paciente.getCPF().contains("123"));
+    }
 
     private void criandoUmaAlaComQuantidadeMinimaInvalida(int quantidadeDeLeito){
 
