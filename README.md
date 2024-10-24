@@ -2,8 +2,9 @@
 
 ### Procedimento Metodológico para trabalharmos a Disciplina
 
-Para conectar a teoria à prática de forma natural, criaremos um contexto fictício neste repositório que será 
-utilizado com intuito de provocar discussões sobre conceitos e práticas de Estrutura de Dados Lineares com a turma 
+Para conectar a teoria à prática de forma natural, criaremos um contexto fictício neste repositório 
+(ver [Conteúdo do Curso](/documentacao/curso/README.md)) 
+que será utilizado com intuito de provocar discussões sobre conceitos e práticas de Estrutura de Dados Lineares com a turma 
 ( [137684 - TEC.0020 - Estrutura de Dados Lineares](https://suap.ifrn.edu.br/edu/meu_diario/137684/1/)). 
 Para isso, a proposta é que o período de dois encontros represente uma **iteração** sobre o problema em questão e 
 o conteúdo da disciplina com intuito de compreendermos o assunto para **incrementar** a solução por meio do que foi trabalhado em sala 
