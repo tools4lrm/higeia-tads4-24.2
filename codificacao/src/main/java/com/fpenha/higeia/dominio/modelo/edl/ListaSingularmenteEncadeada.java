@@ -16,7 +16,6 @@ import com.fpenha.higeia.dominio.modelo.DominioException;
  */
 public interface ListaSingularmenteEncadeada <T> extends Vetor<T> {
 
-
     /**
      * Método responsável por adicionar o elemento como sucessor na estrutura.
      * 
@@ -31,7 +30,6 @@ public interface ListaSingularmenteEncadeada <T> extends Vetor<T> {
      */
     public int tamanho();
 
-
     /**
      * Método que retornará o primeiro elemento da lista.
      * 
@@ -41,13 +39,11 @@ public interface ListaSingularmenteEncadeada <T> extends Vetor<T> {
     public T primeiroElemento()throws DominioException;
 
     /**
-     * Método que retornará o primeiro elemento da lista.
+     * Método que retornará o último elemento da lista.
      * 
      * @return o elemento que estiver na última posição da lista.
      * @throws DominioException Exceção lançada se a estrutura estiver vazia.
      */
     public T ultimoElemento() throws DominioException;
-
-
 
 }
