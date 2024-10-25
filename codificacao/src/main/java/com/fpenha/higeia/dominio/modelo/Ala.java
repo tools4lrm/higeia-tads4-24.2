@@ -1,12 +1,14 @@
 package com.fpenha.higeia.dominio.modelo;
 
+import com.fpenha.higeia.dominio.modelo.edl.Vetor;
+
 /**
  * Classe que repreesnta um ambiente especializado para o tratamento e controle de pacientes 
  * acometido por doenças com gravidade e necessidades similares. Possibilitando assim que o 
  * corpo técnico e recursos tecnológicos possam ser aproveitado na sua plenitude.
  * 
  */
-public class Ala {
+public class Ala implements Vetor<Paciente>{
 
     /*
      * Uma Ala tem que ter no mínimo um (1) leito
@@ -40,28 +42,19 @@ public class Ala {
         this.leitos = new Leito[quantidadeDeLeito];
     }
 
-    /**
-     * Este método adciona um Paciente no primeiro Leito vazio da Ala.
-     * 
-     * @param paciente uma instancia de Paciente que ocupará um Leito desta Ala.
-     * @throws DominioException Exceção lançada se a Ala estiver lotada.
-     */
-    public void adicionarPaciente (Paciente paciente) throws DominioException{
+    @Override
+    public void inserir(Paciente elemento) throws DominioException {
 
         if(alaLotada())
             throw new DominioException("Ala Lotada: " + nome);
         
-        Leito leitoOcupado = new Leito(paciente);
+        Leito leitoOcupado = new Leito(elemento);
         leitos[indiceDeEntrada++] = leitoOcupado;
 
     }
 
-    /**
-     * Este método remove o Paciente do último Leito ocupado na Ala.
-     * 
-     * @throws DominioException Exceção lançada se a Ala estiver vazia.
-     */
-    public Paciente removerPaciente() throws DominioException{
+    @Override
+    public Paciente remover() throws DominioException {
         
         if(alaVazia())
             throw new DominioException("Ala Vazia: " + nome);
@@ -93,5 +86,6 @@ public class Ala {
     private boolean alaVazia () {
         return leitos[0] == null;
     }
+
 
 }

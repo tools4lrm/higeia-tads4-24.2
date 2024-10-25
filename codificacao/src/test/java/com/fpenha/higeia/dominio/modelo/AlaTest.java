@@ -22,10 +22,10 @@ public class AlaTest {
     void adicionarPacienteEmAlaLotada() throws DominioException{
 
         Ala ala = new Ala(null, 1);
-        ala.adicionarPaciente(new Paciente(null, null));
+        ala.inserir(new Paciente(null, null));
 
         Exception excecaoLancada = assertThrows(DominioException.class,
-                                () -> ala.adicionarPaciente(new Paciente(null, null)),
+                                () -> ala.inserir(new Paciente(null, null)),
                                 "Esperado que lance uma exeção de Ala Lotada" );
                             
         assertTrue(excecaoLancada.getMessage().contains("Ala Lotada: "));
@@ -38,7 +38,7 @@ public class AlaTest {
         Ala ala = new Ala(null, 1);
         
         Exception excecaoLancada = assertThrows(DominioException.class,
-                                () -> ala.removerPaciente(),
+                                () -> ala.remover(),
                                 "Esperado que lance uma exeção de Ala Vazia" );
                             
         assertTrue(excecaoLancada.getMessage().contains("Ala Vazia: "));
@@ -49,13 +49,13 @@ public class AlaTest {
     void removerPacienteDeAlaLotada() throws DominioException {
 
         Ala ala = new Ala(null, 1);
-        ala.adicionarPaciente(new Paciente("fabio", "123"));
+        ala.inserir(new Paciente("fabio", "123"));
 
         assertThrows(DominioException.class,
-               () -> ala.adicionarPaciente(new Paciente(null, null)),
+               () -> ala.inserir(new Paciente(null, null)),
                "Esperado que lance uma exeção de Ala Lotada" );
 
-        Paciente paciente = ala.removerPaciente();       
+        Paciente paciente = ala.remover();       
         assertTrue(paciente.getCPF().contains("123"));
     }
 
