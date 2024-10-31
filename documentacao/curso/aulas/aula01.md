@@ -26,9 +26,9 @@ Para resolver este problema, você pode utilizar **vetores**, uma estrutura de d
 
 #### Definição e Conceito de Vetor  
 
-Um **vetor** (também chamado de **array**, **arranjo** ou **variável indexada**) é uma estrutura de dados linear que armazena um conjunto, **agrupado**, 
-de elementos do mesmo tipo em posições consecutivas na memória. Cada posição no vetor é referenciada por um **índice**, 
-que permite o acesso direto ao valor armazenado naquela posição de forma única.  
+Um **vetor** (também chamado de **array**, **arranjo** ou **variável indexada**) é uma estrutura de dados linear que armazena um conjunto, 
+**agrupado**, de elementos do mesmo tipo em posições consecutivas na memória (**sequencial estático**). Cada posição no vetor é referenciada 
+por um **índice**, permitindo pecorrer a estrutua em qualquer direção e acessar diretamente ao valor armazenado em uma determinada posição de forma única.    
 
 O **índice** geralmente começa em `0`, o que significa que o primeiro elemento do vetor está na posição `0`, o segundo na posição `1`, e assim sucessivamente.  
 
@@ -41,7 +41,11 @@ O **índice** geralmente começa em `0`, o que significa que o primeiro elemento
 - **Sequencial**: Os elementos de um vetor são dispostos de maneira linear e sequencial, preservando a ordem de inserção.  
 
 #### Vantagens de um Vetor:  
-- **Rapidez no acesso**: Como os elementos podem ser acessados diretamente pelo índice, um vetor permite buscas e acessos a dados de forma muito eficiente.  
+- **Rapidez no acesso**: Como os elementos podem ser acessados diretamente pelo índice, um vetor permite buscas e acessos a dados de forma muito eficiente.
+  
+- **Economia de memória**: Os ponteiros (as referências) são implícitos nesta estrutura.
+  
 #### Desvantagens de um Vetor:  
-- **Tamanho fixo**: A principal desvantagem de um vetor é que ele tem um tamanho fixo, o que pode ser um problema se o número de elementos a serem armazenados não for conhecido previamente.  
+- **Tamanho fixo**: A principal desvantagem de um vetor é que ele tem um tamanho fixo, o que pode ser um problema se o número de elementos a serem armazenados não for conhecido previamente.
+- 
 - **Dificuldade em inserções e remoções**: Inserir ou remover elementos em qualquer posição, exceto no final, pode ser uma operação lenta, já que todos os elementos subsequentes precisam ser movidos.  
