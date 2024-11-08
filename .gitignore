@@ -23,6 +23,13 @@
 hs_err_pid*
 replay_pid*
 
+# eclipse	 config
+.settings/
+.classpath
+.project
+
+
+
 # vscode config
 .vscode/*
 
