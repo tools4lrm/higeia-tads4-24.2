@@ -5,6 +5,7 @@ import com.fpenha.higeia.apresentacao.Comando;
 import com.fpenha.higeia.apresentacao.CriarAlaComTamanhoFixo;
 import com.fpenha.higeia.apresentacao.Menu;
 import com.fpenha.higeia.apresentacao.RemoverPacienteDeUmaAla;
+import com.fpenha.higeia.apresentacao.util.GerenciadorDeSessao;
 
 public class Inicializacao {
 

@@ -27,14 +27,17 @@ public class Menu {
 	
     public void apresentarEExecutar() {
         
-        leitorDeEntrada.apresente("Escolha a opção : \n\n");
+    	leitorDeEntrada.apresente("Escolha a opção : \n\n");
         for (int i = 0; i < comandos.length; i++) {
         	leitorDeEntrada.apresente(i + " - " + comandos[i].descricao() + "\n");
 		}
         
-        int escolha = leitorDeEntrada.leiaInt("\nDigite a opção desejada");
+        int escolha = leitorDeEntrada.leiaInt("\nDigite a opção desejada : ");
         Comando comando = comandos[escolha];
-        comando.execute();
+        if(comando != null) {
+        	comando.execute();
+        	apresentarEExecutar();
+        }
     }
 	
 }
