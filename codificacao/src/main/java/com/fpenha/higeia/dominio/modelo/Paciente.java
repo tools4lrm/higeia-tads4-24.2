@@ -4,6 +4,7 @@ public class Paciente {
 
     private String nome;
     private String CPF;
+    private int numeracaoDeLeito;
 
     public Paciente(String nome, String CPF){
         this.nome = nome;
@@ -17,6 +18,14 @@ public class Paciente {
     public String getCPF() {
         return CPF;
     }
-    
+
+	public int getNumeracaoDeLeito() {
+		return numeracaoDeLeito;
+	}
+
+	public void setNumeracaoDeLeito(int numeracaoDeLeito) {
+		this.numeracaoDeLeito = numeracaoDeLeito;
+	}
+      
     
 }

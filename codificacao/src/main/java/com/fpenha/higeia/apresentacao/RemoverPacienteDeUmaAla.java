@@ -14,11 +14,11 @@ public class RemoverPacienteDeUmaAla implements Comando {
 		GerenciadorDeSessao sessao = GerenciadorDeSessao.getInstance();
 		Ala ala = (Ala) sessao.recuperaDadoDaSessao(GerenciadorDeSessao.ALA_ARMAZENADA);
 		
-		try {
-			ala.remover();
-		} catch (DominioException e) {
-			leitor.apresente("\n\nErro : "+e.getMessage()+"\n");
-		}
+//		try {
+//			ala.remover();
+//		} catch (DominioException e) {
+//			leitor.apresente("\n\nErro : "+e.getMessage()+"\n");
+//		}
 
 	}
 

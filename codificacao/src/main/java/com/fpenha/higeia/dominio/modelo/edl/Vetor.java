@@ -29,5 +29,5 @@ public interface Vetor <T> {
      * 
      * @throws DominioException Exceção lançada se a estrutura estiver vazia.
      */
-    public T remover() throws DominioException;
+    public void remover(T elemento) throws DominioException;
 }

@@ -19,9 +19,9 @@ public class Ala implements Vetor<Paciente>{
     private Leito[] leitos;
 
     /**
-     * referência do Leito que receberá o paciente corrente (do momento).
+     * referência a quantidade de leito ocupados no momento.
      */
-    private int indiceDeEntrada = 0;
+    private int quantidade = 0;
 
     /**
      * Instancia a Ala com uma identificação (nome) e a quantidade de leitos que
@@ -49,42 +49,44 @@ public class Ala implements Vetor<Paciente>{
             throw new DominioException("Ala Lotada: " + nome);
         
         Leito leitoOcupado = new Leito(elemento);
-        leitos[indiceDeEntrada++] = leitoOcupado;
+        leitos[elemento.getNumeracaoDeLeito()] = leitoOcupado;
+        ++quantidade;
 
     }
 
     @Override
-    public Paciente remover() throws DominioException {
+    public void remover(Paciente elemento) throws DominioException {
         
-        if(alaVazia())
+        if(alaVazia()) {
             throw new DominioException("Ala Vazia: " + nome);
-
-        Leito leito =  leitos[--indiceDeEntrada];
-        Paciente paciente = leito.getPaciente();
+        }
         
-        return paciente;       
+        if (elemento == null){
+            throw new DominioException("Objeto inválido !!!");
+        }
+        
+        if(leitos[elemento.getNumeracaoDeLeito()] == null ) {
+        	throw new DominioException("Paciente não está no Leito !!!");
+        }
+        
+        Paciente pacienteNoLeito = leitos[elemento.getNumeracaoDeLeito()].getPaciente();
+        if(!pacienteNoLeito.getNome().equals(elemento.getNome())) {
+        	throw new DominioException("Paciente alocado no Leito não é o mesmo !!!");
+        }
+
+        
+        leitos[pacienteNoLeito.getNumeracaoDeLeito()] = null;
+        --quantidade;
+              
     }
 
-    /**
-     * Este método remove o Paciente do último Leito ocupado na Ala.
-     * 
-     * @param paciente uma instancia de Paciente que desocupará o Leito no qual 
-     *                  está associado.
-     * @throws DominioException Exceção lançada se a Ala estiver vazia ou
-     *                          o paciente não esteja na Ala.
-     */
-    public void removerPaciente(Paciente paciente) throws DominioException{
-        
-        if(alaVazia())
-            throw new DominioException("Ala Vazia: " + nome);       
-    }
 
     private boolean alaLotada () {
-        return leitos.length-1 < indiceDeEntrada;
+        return quantidade >= leitos.length  ;
     }
 
     private boolean alaVazia () {
-        return leitos[0] == null;
+        return quantidade <= 0;
     }
 
 
