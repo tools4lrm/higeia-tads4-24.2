@@ -1,6 +1,6 @@
 package com.fpenha.higeia.apresentacao;
 
-import com.fpenha.higeia.apresentacao.util.GerenciadorDeSessao;
+import com.fpenha.higeia.apresentacao.util.GerenciadorDeAlas;
 import com.fpenha.higeia.apresentacao.util.LeitorDeEntrada;
 import com.fpenha.higeia.dominio.modelo.Ala;
 import com.fpenha.higeia.dominio.modelo.DominioException;
@@ -19,8 +19,8 @@ public class CriarAlaComTamanhoFixo implements Comando {
 			
 			try {
 				Ala ala = new Ala(nomeDaAla, quantidadeDeLeitos);
-				GerenciadorDeSessao sessao = GerenciadorDeSessao.getInstance();
-				sessao.configuraDadoParaSessao(GerenciadorDeSessao.ALA_ARMAZENADA, ala);
+				GerenciadorDeAlas sessao = GerenciadorDeAlas.getInstance();
+				sessao.configuraDadoParaSessao(GerenciadorDeAlas.ALA_ARMAZENADA, ala);
 				
 				problemaNaCriacao = false;
 			} catch (DominioException e) {

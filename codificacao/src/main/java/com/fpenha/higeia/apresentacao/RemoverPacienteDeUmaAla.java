@@ -1,6 +1,6 @@
 package com.fpenha.higeia.apresentacao;
 
-import com.fpenha.higeia.apresentacao.util.GerenciadorDeSessao;
+import com.fpenha.higeia.apresentacao.util.GerenciadorDeAlas;
 import com.fpenha.higeia.apresentacao.util.LeitorDeEntrada;
 import com.fpenha.higeia.dominio.modelo.Ala;
 import com.fpenha.higeia.dominio.modelo.DominioException;
@@ -11,15 +11,17 @@ public class RemoverPacienteDeUmaAla implements Comando {
 	public void execute() {
 		
 		LeitorDeEntrada leitor = new LeitorDeEntrada();
-		GerenciadorDeSessao sessao = GerenciadorDeSessao.getInstance();
-		Ala ala = (Ala) sessao.recuperaDadoDaSessao(GerenciadorDeSessao.ALA_ARMAZENADA);
+		GerenciadorDeAlas sessao = GerenciadorDeAlas.getInstance();
+		Ala ala = (Ala) sessao.recuperaDadoDaSessao(GerenciadorDeAlas.ALA_ARMAZENADA);
 		
-//		try {
-//			ala.remover();
-//		} catch (DominioException e) {
-//			leitor.apresente("\n\nErro : "+e.getMessage()+"\n");
-//		}
-
+		if (ala != null) {
+			
+		} else {
+			leitor.apresente("Crie uma Ala antes!!!!");
+			leitor.limpar();
+		}
+		
+		
 	}
 
 	@Override

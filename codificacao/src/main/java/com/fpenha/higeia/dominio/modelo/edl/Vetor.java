@@ -15,6 +15,14 @@ import com.fpenha.higeia.dominio.modelo.DominioException;
  */
 public interface Vetor <T> {
 
+   /**
+     * Método que buscará o elemento passado no vetor
+     * 
+     * @param elemento instancia do elemento que será armazenado na estrutura.
+     * @throws DominioException Exceção lançada se a estrutura estiver cheia.
+     */
+    public void buscar(T elemento) throws DominioException;
+	
  
     /**
      *  Método responsável por adicionar o elemento na estrutura.
@@ -30,4 +38,10 @@ public interface Vetor <T> {
      * @throws DominioException Exceção lançada se a estrutura estiver vazia.
      */
     public void remover(T elemento) throws DominioException;
+    
+    /**
+     *  Método que irá retornar os elementos do vetor em um array de acordo com eles estejam posicionados
+     * 
+     */   
+    public T[] array();
 }

@@ -1,6 +1,6 @@
 package com.fpenha.higeia.apresentacao;
 
-import com.fpenha.higeia.apresentacao.util.GerenciadorDeSessao;
+import com.fpenha.higeia.apresentacao.util.GerenciadorDeAlas;
 import com.fpenha.higeia.apresentacao.util.LeitorDeEntrada;
 import com.fpenha.higeia.dominio.modelo.Ala;
 import com.fpenha.higeia.dominio.modelo.DominioException;
@@ -12,19 +12,23 @@ public class AdicionarPacienteEmUmLeitoDaAla implements Comando {
 	public void execute() {
 		
 		LeitorDeEntrada leitor = new LeitorDeEntrada();
-		GerenciadorDeSessao sessao = GerenciadorDeSessao.getInstance();
-		Ala ala = (Ala) sessao.recuperaDadoDaSessao(GerenciadorDeSessao.ALA_ARMAZENADA);
+		GerenciadorDeAlas sessao = GerenciadorDeAlas.getInstance();
+		Ala ala = (Ala) sessao.recuperaDadoDaSessao(GerenciadorDeAlas.ALA_ARMAZENADA);
 		
-		
-		String nomeDoPaciente = leitor.leiaString("Informe o nome do Paciente : ");
-		String CPF = leitor.leiaString("Informe o nome CPF do Paciente : ");
-		
-		Paciente paciente  = new Paciente(nomeDoPaciente, CPF);
-		
-		try {
-			ala.inserir(paciente);
-		} catch (DominioException e) {
-			leitor.apresente("\n\nErro : "+e.getMessage()+"\n");
+		if (ala != null) {
+			String nomeDoPaciente = leitor.leiaString("Informe o nome do Paciente : ");
+			String CPF = leitor.leiaString("Informe o nome CPF do Paciente : ");
+			
+			Paciente paciente  = new Paciente(nomeDoPaciente, CPF);
+			
+			try {
+				ala.inserir(paciente);
+			} catch (DominioException e) {
+				leitor.apresente("\n\nErro : "+e.getMessage()+"\n");
+			}
+		} else {
+			leitor.apresente("Crie uma Ala antes!!!!");
+			leitor.limpar();
 		}
 
 	}

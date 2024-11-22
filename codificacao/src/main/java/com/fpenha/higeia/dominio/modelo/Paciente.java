@@ -11,6 +11,12 @@ public class Paciente {
         this.CPF = CPF;
     }
 
+    public Paciente  (String nome, String CPF, int numeracaoDeLeito) {
+    	this(nome, CPF);
+    	
+    	this.numeracaoDeLeito = numeracaoDeLeito;
+    }
+    
     public String getNome() {
         return nome;
     }

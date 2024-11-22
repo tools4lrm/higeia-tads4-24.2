@@ -35,13 +35,14 @@ public class AlaTest {
     @Test
     void removerPacienteEmAlaVazia() throws DominioException {
 
-        Ala ala = new Ala(null, 1);
+        Ala ala = new Ala("covid", 1);
+        Paciente paciente = new Paciente("Fábio", "123", 1);
         
-//        Exception excecaoLancada = assertThrows(DominioException.class,
-//                                () -> ala.remover(),
-//                                "Esperado que lance uma exeção de Ala Vazia" );
-//                            
-//        assertTrue(excecaoLancada.getMessage().contains("Ala Vazia: "));
+        Exception excecaoLancada = assertThrows(DominioException.class,
+                                () -> ala.remover(paciente),
+                                "Esperado que lance uma exeção de Ala Vazia" );
+                            
+        assertTrue(excecaoLancada.getMessage().contains("Ala Vazia: "));
         
     }
 
