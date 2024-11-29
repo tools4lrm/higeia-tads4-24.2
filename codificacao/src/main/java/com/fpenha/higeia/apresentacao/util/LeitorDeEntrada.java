@@ -1,6 +1,5 @@
 package com.fpenha.higeia.apresentacao.util;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class LeitorDeEntrada {
@@ -49,16 +48,6 @@ public class LeitorDeEntrada {
 
     public void apresente(String texto) {
     	System.out.print(texto);
-    }
-    
-    public void limpar() {
-    	try {
-    		String[] cls = new String[] {"cmd.exe", "/c", "cls"};
-    		Runtime.getRuntime().exec(cls);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
     
     public void close() {

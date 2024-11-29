@@ -14,7 +14,7 @@ import com.fpenha.higeia.dominio.modelo.DominioException;
  * Diferente do Vetor, essa estrutura é flexível no tamanho e acesso.
  * 
  */
-public interface ListaSingularmenteEncadeada <T> extends Vetor<T> {
+public interface ListaSingularmenteEncadeada <T>  {
 
     /**
      * Método responsável por adicionar o elemento como sucessor na estrutura.

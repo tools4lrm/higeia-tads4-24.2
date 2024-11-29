@@ -1,15 +1,14 @@
 package com.fpenha.higeia.dominio.modelo.edl;
 
-import com.fpenha.higeia.dominio.modelo.DominioException;
-import com.fpenha.higeia.dominio.modelo.Leito;
-import com.fpenha.higeia.dominio.modelo.Paciente;
+import java.lang.reflect.Array;
 
-public abstract class VetorTADS<T> implements Vetor<T> {
+import com.fpenha.higeia.dominio.modelo.DominioException;
+
+public abstract class VetorTADS<E extends Dado, K> implements Vetor<E, K> {
 
     private final int TAMANHO_MINIMO_DE_ELEMENTOS = 1;
 
-    protected String descricao;
-    protected T[] elementos;
+   protected E[] elementos;
 
     /**
      * referência a quantidade de elementos instanciados.
@@ -25,75 +24,105 @@ public abstract class VetorTADS<T> implements Vetor<T> {
      * @throws DominioException Exceção lançada se o quantitativo de elementos mínimo (1)
      *                          não for respeitada.
      */
-    protected VetorTADS(String descricao, int quantidadeDeElementos) throws DominioException {
+    protected VetorTADS(Class cls, int quantidadeDeElementos) throws DominioException {
 
         verificaSeAQuantidadeInformadaEhValida(quantidadeDeElementos);
         
-        this.descricao = descricao;
-        this.elementos = (T[]) new Object[quantidadeDeElementos];
+        this.elementos = (E[]) Array.newInstance(cls, quantidadeDeElementos);
     }
 
+    
+	@Override
+	public E buscar(int posicao) throws DominioException {
+	
+		estruturaEstahVazia();
+		aPosicaoEhValida(posicao);
+		haElementoNaPosicao(posicao);
+		
+		return elementos[posicao];
+	}
+    
+	@Override
+    public E buscar (K chave) throws DominioException {
+    	
+		estruturaEstahVazia();
+	
+		for (int i = 0; i < elementos.length; i++) {
+			
+			E elemento = elementos[i];
+			if(elemento == null) continue;
+			if(elemento.getChave().equals(chave)) { 
+				return elemento;
+			}
+		}
+		
+		throw new DominioException("Elemento não encontrado na estrutura !!!");
+    }
+	
+	@Override
+    public int posicaoNaEstrutura (K chave) throws DominioException {
+    	
+		estruturaEstahVazia();
 
+		for (int i = 0; i < elementos.length; i++) {
+			
+			E elemento = elementos[i];
+			if(elemento == null) continue;
+			if(elemento.getChave().equals(chave)) { 
+				return i;
+			}
+		}
+		
+		throw new DominioException("Elemento não encontrado na estrutura !!!");
+    }
 
     @Override
-    public void inserir(T elemento) throws DominioException {
+    public void inserir(E elemento, int posicao) throws DominioException {
 
-        verificaSeExisteLeitoDisponivel();
-        verificaSeOPacienteEhValido(elemento);
-        verificaSeExistePacienteNoLeitoInformado(elemento.getNumeracaoDeLeito());
+        estruturaEstahCheia();
+        oElementoEhValido(elemento);
+        naoHaElementoNaPosicao(posicao);
         
-        Leito leitoOcupado = new Leito(elemento);
-        leitos[elemento.getNumeracaoDeLeito()] = leitoOcupado;
+        elementos[posicao] = elemento;
         ++quantidade;
 
     }
 
+    @Override
+    public E remover(int posicao) throws DominioException {
+    
+    	E elementoASerRemovido = buscar(posicao);
+    	elementos[posicao] = null;
+    	--quantidade;
+    	
+    	return elementoASerRemovido;
+    }
 
     @Override
-    public void remover(Paciente elemento) throws DominioException {
-        
+	public E[] array() {
+		return elementos.clone();
+	}
 
-        verificaSeAlaEstaVazia();
-        verificaSeOPacienteEhValido(elemento);
-        verificaSeExistePacienteNoLeitoInformado(elemento.getNumeracaoDeLeito());
-        verificaSeOPacienteEhOMesmoDoLeito(elemento);
-        
-        leitos[elemento.getNumeracaoDeLeito()] = null;
-        --quantidade;
-              
-    }
-    
-	@Override
-	public void buscar(Paciente elemento) throws DominioException {
+	private void aPosicaoEhValida(int posicao) throws DominioException {
+		if( posicao < 0 || posicao > (elementos.length-1) ) {
+        	throw new DominioException("Posição informada é inválida !!!");
+        }		
+	}
 	
-		verificaSeAlaEstaVazia();        
-        verificaSeOPacienteEhValido(elemento);
-        
-        
-		
+	private void naoHaElementoNaPosicao(int posicao) throws DominioException {
+		if(elementos[posicao] != null ) {
+        	throw new DominioException("Existe Elemento na posição informada !!!");
+        }
 	}
-
-	@Override
-	public Paciente[] array() {
-		return null;
-	}
-    
-
-	private void verificaSeOPacienteEhOMesmoDoLeito(Paciente elemento) throws DominioException {
-		Paciente pacienteNoLeito = leitos[elemento.getNumeracaoDeLeito()].getPaciente();
-        if(!pacienteNoLeito.getNome().equals(elemento.getNome())) {
-        	throw new DominioException("Paciente alocado no Leito não é o mesmo !!!");
+	
+	private void haElementoNaPosicao(int posicao) throws DominioException {
+		if(elementos[posicao] == null ) {
+        	throw new DominioException("Não existe Elemento na posição informada !!!");
         }
 	}
 
-	private void verificaSeExistePacienteNoLeitoInformado(int numeracaoDeLeito) throws DominioException {
-		if(leitos[numeracaoDeLeito] == null ) {
-        	throw new DominioException("Não existe Paciente não no Leito !!!");
-        }
-	}
-
-	private void verificaSeOPacienteEhValido(T elemento) throws DominioException {
-		if (elemento == null){
+	private void oElementoEhValido(E elemento) throws DominioException {
+		if (elemento == null || elemento.getChave() == null){
             throw new DominioException("Objeto inválido !!!");
         }
 	}
@@ -103,16 +132,15 @@ public abstract class VetorTADS<T> implements Vetor<T> {
             throw new DominioException("Tamanho insuficiente para criação de uma Ala");
 	}
 	
-	private void verificaSeExisteLeitoDisponivel() throws DominioException {
-		if(alaLotada())
-            throw new DominioException("Ala Lotada: " + nome);
+	private void estruturaEstahCheia() throws DominioException {
+		if(quantidade >= elementos.length)
+            throw new DominioException("A estrutura está cheia !!!! ");
 	}
-
-	private void verificaSeAlaEstaVazia() throws DominioException {
-		if(alaVazia()) {
-            throw new DominioException("Ala Vazia: " + nome);
-        }
+	
+	private void estruturaEstahVazia() throws DominioException {
+		if (quantidade == 0) {
+			throw new DominioException("Estrutura vazia ");
+		}
 	}
-
 	
 }

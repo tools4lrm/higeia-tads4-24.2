@@ -26,18 +26,21 @@ public class Menu {
 	}
 	
     public void apresentarEExecutar() {
-        
+            	
     	leitorDeEntrada.apresente("Escolha a opção : \n\n");
+    	    	
         for (int i = 0; i < comandos.length; i++) {
         	leitorDeEntrada.apresente(i + " - " + comandos[i].descricao() + "\n");
 		}
         
         int escolha = leitorDeEntrada.leiaInt("\nDigite a opção desejada : ");
-        Comando comando = comandos[escolha];
-        if(comando != null) {
-        	comando.execute();
-        	apresentarEExecutar();
+        
+        if(escolha >= 0 && escolha < (comandos.length)) {
+        	comandos[escolha].execute();       	
         }
+        
+        apresentarEExecutar();
+
     }
 	
 }

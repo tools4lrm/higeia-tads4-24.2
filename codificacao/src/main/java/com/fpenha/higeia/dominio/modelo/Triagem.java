@@ -4,10 +4,6 @@ import com.fpenha.higeia.dominio.modelo.edl.ListaSingularmenteEncadeada;
 
 public class Triagem implements ListaSingularmenteEncadeada <Paciente>{
 
-    @Override
-    public void remover(Paciente elemento) throws DominioException {
-        throw new UnsupportedOperationException("Unimplemented method 'remover'");
-    }
 
     @Override
     public void inserir(Paciente elemento) {
