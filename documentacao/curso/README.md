@@ -7,6 +7,7 @@
 1. [Conceitos de Estruturas de Dados](/documentacao/curso/aulas/aula01.md#conceitos-de-estruturas-de-dados)  
 2. [Vetores](/documentacao/curso/aulas/aula01.md#vetores)
 3. [Lista Encadeada](/documentacao/curso/aulas/aula02.md)
+4. [Pilhas e Filas](/documentacao/curso/aulas/aula03.md)
 
 ## Calendário
 
